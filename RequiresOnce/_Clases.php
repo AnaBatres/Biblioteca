@@ -213,6 +213,17 @@ class Libro extends Dato implements JsonSerializable
         // Llamamos a la función DAO para obtener el autor por ID.
         return DAO::autorObtenerPorId($this->autorID);
     }
+
+    public function obtenerResena(): Resena
+    {
+        if ($this->ResenaID == null) {
+            // Si el autorID es nulo, retornamos un objeto Autor vacío o manejarlo como prefieras.
+            return new Resena();
+        }
+
+        // Llamamos a la función DAO para obtener el autor por ID.
+        return DAO::resenaObtenerPorId($this->ResenaID);
+    }
 }
 
 class Usuario extends Dato implements JsonSerializable
@@ -270,4 +281,76 @@ class Usuario extends Dato implements JsonSerializable
     {
         $this->contrasenna = $contrasenna;
     }
+}
+class Resena extends Dato implements JsonSerializable
+{
+    use Identificable;
+
+    private int $LibroID;
+    private int $UsuarioID;
+    private int $Calificacion;
+    private string $Comentario;
+
+    public function __construct(int $id, int $libroID, int $usuarioID, int $calificacion, string $comentario)
+    {
+        $this->ResenaID = $id;
+        $this->LibroID = $libroID;
+        $this->UsuarioID = $usuarioID;
+        $this->Calificacion = $calificacion;
+        $this->Comentario = $comentario;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "ResenaID" => $this->ResenaID,
+            "LibroID" => $this->LibroID,
+            "UsuarioID" => $this->UsuarioID,
+            "calificacion" => $this->Calificacion,
+            "comentario" => $this->Comentario,
+        ];
+    }
+
+    public function getLibroId(): int
+    {
+        return $this->LibroID;
+    }
+
+    public function setLibroId(int $libroID)
+    {
+        $this->LibroID = $libroID;
+    }
+
+    public function getUsuarioId(): int
+    {
+        return $this->UsuarioID;
+    }
+
+    public function setUsuarioId(int $usuarioID)
+    {
+        $this->UsuarioID = $usuarioID;
+    }
+
+    public function getCalificacion(): int
+    {
+        return $this->Calificacion;
+    }
+
+    public function setCalificacion(int $calificacion)
+    {
+        $this->Calificacion = $calificacion;
+    }
+
+    public function getComentario(): string
+    {
+        return $this->Comentario;
+    }
+
+    public function setComentario(string $comentario)
+    {
+        $this->Comentario = $comentario;
+    }
+
+
+
 }

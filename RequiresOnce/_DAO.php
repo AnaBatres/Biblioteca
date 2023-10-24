@@ -304,12 +304,12 @@ class DAO
         return $datos;
     }
 
-    private static function usuarioCrearDesdeFila(array $fila): usuario
+    private static function usuarioCrearDesdeFila(array $fila): Usuario
     {
-        return new usuario($fila["id"], $fila["nombre"], $fila["usuario"], $fila["contrasenna"]);
+        return new Usuario($fila["id"], $fila["nombre"], $fila["usuario"], $fila["contrasenna"]);
     }
 
-    public static function usuarioObtener(string $usuario, string $contrasenna): ?usuario
+    public static function usuarioObtener(string $usuario, string $contrasenna): ?Usuario
     {
         $rs = self::ejecutarConsulta(
             "SELECT * FROM usuario WHERE usuario=? AND contrasenna=?",
@@ -324,7 +324,22 @@ class DAO
         }
     }
 
-    public static function usuarioCrear(string $nombre, string $usuario, string $contrasenna): ?Autor
+    public static function usuarioObtenerPorId(int $id): ?Usuario
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM Usuario WHERE id=?",
+            [$id]
+        );
+
+        if ($rs) {
+            $fila = $rs[0];
+            return self::usuarioCrearDesdeFila($fila);
+        } else {
+            return null;
+        }
+    }
+
+    public static function usuarioCrear(string $nombre, string $usuario, string $contrasenna): ?Usuario
     {
         $idAutogenerado = self::ejecutarInsert(
             "INSERT INTO usuario (nombre,usuario,contrasenna) VALUES (?, ?,?)",
@@ -332,6 +347,54 @@ class DAO
         );
 
         if ($idAutogenerado == null) return null;
-        else return self::autorObtenerPorId($idAutogenerado);
+        else return self::usuarioObtenerPorId($idAutogenerado);
     }
+
+    private static function resenaCrearDesdeFila(array $fila): Resena
+    {
+        return new Resena($fila["ResenaID"], $fila["LibroID"], $fila["UsuarioID"], $fila["Calificacion"], $fila["Comentario"]);
+    }
+
+    public static function resenaObtenerPorId(int $id): ?Resena
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM resena WHERE resenaID=?",
+            [$id]
+        );
+
+        if ($rs) {
+            $fila = $rs[0];
+            return self::resenaCrearDesdeFila($fila);
+        } else {
+            return null;
+        }
+    }
+    public static function resenaCrear(int $libroId, int $usuarioId, int $calificacion, string $comentario): ?Resena
+    {
+        $idAutogenerado = self::ejecutarInsert(
+            "INSERT INTO resena (libroID, usuarioID, calificacion, comentario) VALUES (?, ?, ?, ?)",
+            [$libroId, $usuarioId, $calificacion, $comentario]
+        );
+
+        if ($idAutogenerado == null) return null;
+        else return self::resenaObtenerPorId($idAutogenerado);
+    }
+
+    public static function obtenerResenas(int $libroId): array
+    {
+        $datos = [];
+
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM Resena WHERE LibroID = ?",
+            [$libroId]
+        );
+
+        foreach ($rs as $fila) {
+            $resena = self::resenaCrearDesdeFila($fila);
+            array_push($datos, $resena);
+        }
+
+        return $datos;
+    }
+
 }

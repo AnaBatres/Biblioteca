@@ -1,7 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-CREATE DATABASE IF NOT EXISTS cine DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS biblioteca DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE biblioteca;
 
 DROP TABLE IF EXISTS Autores;
@@ -50,4 +50,28 @@ INSERT INTO Libros (Titulo, ISBN, Editorial, Genero, Paginas, Idioma, AutorID, c
                                                                                                         ('Cumbres Borrascosas', '978-84-15-84009-9', 'Ediciones Alianza', 'Novela Gótica', 400, 'Español', 5, 1, 4),
                                                                                                         ('Los Crímenes de la Calle Morgue', '978-84-487-0444-0', 'Editorial Renacimiento', 'Misterio', 256, 'Español', 6, 1, 5),
                                                                                                         ('La Máscara de la Muerte Roja', '978-84-607-7851-0', 'Ediciones Cátedra', 'Terror', 88, 'Español', 6, 0, 3);
+
+CREATE TABLE IF NOT EXISTS Usuario (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    usuario VARCHAR(255) NOT NULL,
+    contrasenna VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE IF NOT EXISTS Resenas (
+                                       ResenaID INT NOT NULL AUTO_INCREMENT,
+                                       LibroID INT NOT NULL,
+                                       UsuarioID INT NOT NULL,
+                                       Calificacion INT NOT NULL,
+                                       Comentario TEXT,
+                                       PRIMARY KEY (ResenaID),
+    KEY fk_LibroID (LibroID),
+    KEY fk_UsuarioID (UsuarioID),
+    CONSTRAINT fk_LibroID FOREIGN KEY (LibroID) REFERENCES Libros (LibroID) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_UsuarioID FOREIGN KEY (UsuarioID) REFERENCES Usuario (id) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 COMMIT;

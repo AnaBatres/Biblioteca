@@ -40,7 +40,7 @@ $libros = DAO::libroObtenerTodos();
         <div class="contenedor">
             <div class="titulo-autor">
                 <a id="titulo" href="LibrosShow.php?id=<?= $libro->getId() ?>"><img src="Imagenes/imagen<?= $libro->getId()?>.jpg" style="width: 180px; height: 230px;"></a>
-                <div><a href="LibrosShow.php?id=<?= $libro->getId() ?>"><?= $libro->getTitulo   () ?></a></div>
+                <div><a href="LibrosShow.php?id=<?= $libro->getId() ?>"><?= $libro->getTitulo() ?></a></div>
                 <div><a href="AutoresShow.php?id=<?=$libro->getAutorID()?>"><?= DAO::autorObtenerPorId($libro->getAutorID())->getNombre() ?></a></div>
             </div>
             <div class="iconos">
