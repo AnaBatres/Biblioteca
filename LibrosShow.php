@@ -7,7 +7,6 @@ $id=$_REQUEST["id"];
 
 $libros = DAO::libroObtenerPorId($id);
 $resenas = DAO::obtenerResenas($id);
-$usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
 
 ?>
 
@@ -92,7 +91,7 @@ $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
 
     <h2>Reseñas:</h2>
     <?php foreach ($resenas as $resena)  {?>
-         <p>Usuario: <?= $usuario->getNombre()?></p>
+         <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
         <p>Calificación: <?= $resena->getCalificacion()?></p>
         <p>Comentario:</p> <?= $resena->getComentario()?>
     <?php } ?>
