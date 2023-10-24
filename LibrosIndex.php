@@ -21,7 +21,8 @@ $libros = DAO::libroObtenerTodos();
     <h2>BIBLIOTECA VIRTUAL</h2>
     <?php
     if(sesionIniciada()){ ?>
-        <a href="Sesiones/SesionCerrar.php">Cerrar Sesion</a>
+           <a href="Perfil.php">Mi Perfil</a>
+<!--        <a href="Sesiones/SesionCerrar.php">Cerrar Sesion</a>-->
     <?php } else { ?>
         <a href="Sesiones/SesionFormulario.php">Inicio Sesion</a>
     <?php } ?>

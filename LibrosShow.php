@@ -7,7 +7,7 @@ $id=$_REQUEST["id"];
 
 $libros = DAO::libroObtenerPorId($id);
 $resenas = DAO::obtenerResenas($id);
-
+$usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
 ?>
 
 <!doctype html>
@@ -91,9 +91,13 @@ $resenas = DAO::obtenerResenas($id);
 
     <h2>Reseñas:</h2>
     <?php foreach ($resenas as $resena)  {?>
-         <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
+        <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
         <p>Calificación: <?= $resena->getCalificacion()?></p>
         <p>Comentario:</p> <?= $resena->getComentario()?>
+        <?php if(DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() ===$usuario->getNombre()) {?>
+            <a href="EditarResena"><img style="width: 25px; height: 25px;" src="Imagenes/editar.jpg"></a>
+            <a href="EliminarResena"><img style="width: 15px; height: 15px;" src="Imagenes/basura.jpg"></a>
+        <?php } ?>
     <?php } ?>
     <form method="POST" action="Resena.php">
         <input type="hidden" name="libroID" value="<?=$libros->getId()?>">
