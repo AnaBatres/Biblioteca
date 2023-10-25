@@ -397,4 +397,32 @@ class DAO
         return $datos;
     }
 
+    public static function resenaEliminarPorId(int $id): bool
+    {
+        $filasAfectadas = self::ejecutarUpdel(
+            "DELETE FROM Resena WHERE ResenaID=?",
+            [$id]
+        );
+
+        return ($filasAfectadas == 1);
+    }
+
+    public static function resenaEliminar(Resena $resena): bool
+    {
+        return self::resenaEliminarPorId($resena->getId());
+    }
+
+    public static function obtenerLibroPorResena($resenaID) {
+        $rs = self::ejecutarConsulta(
+            "SELECT LibroID FROM Resena WHERE ResenaID = ?",
+            [$resenaID]
+        );
+
+        if ($rs) {
+            $fila = $rs[0];
+            return $fila["LibroID"];
+        } else {
+            return null;
+        }
+    }
 }

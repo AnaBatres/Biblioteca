@@ -8,6 +8,7 @@ $id=$_REQUEST["id"];
 $libros = DAO::libroObtenerPorId($id);
 $resenas = DAO::obtenerResenas($id);
 $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
+
 ?>
 
 <!doctype html>
@@ -89,16 +90,6 @@ $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
     <p>Numero de paginas: <?=$libros->getPaginas()?></p>
     <p>Autor: <?= $libros->obtenerAutor()->getNombre()?></p>
 
-    <h2>Reseñas:</h2>
-    <?php foreach ($resenas as $resena)  {?>
-        <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
-        <p>Calificación: <?= $resena->getCalificacion()?></p>
-        <p>Comentario:</p> <?= $resena->getComentario()?>
-        <?php if(DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() ===$usuario->getNombre()) {?>
-            <a href="EditarResena"><img style="width: 25px; height: 25px;" src="Imagenes/editar.jpg"></a>
-            <a href="EliminarResena"><img style="width: 15px; height: 15px;" src="Imagenes/basura.jpg"></a>
-        <?php } ?>
-    <?php } ?>
     <form method="POST" action="Resena.php">
         <input type="hidden" name="libroID" value="<?=$libros->getId()?>">
         <label for="calificacion">Calificación (1-5):</label>
@@ -109,6 +100,17 @@ $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
         <br>
         <input type="submit" value="Enviar Reseña">
     </form>
+
+    <h2>Reseñas:</h2>
+    <?php foreach ($resenas as $resena)  {?>
+        <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
+        <p>Calificación:      <img style="width: 50px; height: 10px;" src="Imagenes/estrella<?= $resena->getCalificacion()?>.png"></p>
+        <p>Comentario:</p> <?= $resena->getComentario()?>
+        <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>
+            <a href="EditarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/editar.png"></a>
+            <a href="ResenaEliminar.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
+        <?php } ?>
+    <?php } ?>
 </body>
 </html>
 

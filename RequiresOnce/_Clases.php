@@ -311,6 +311,16 @@ class Resena extends Dato implements JsonSerializable
         ];
     }
 
+    public function getId(): int
+    {
+        return $this->ResenaID;
+    }
+
+    public function setId(int $resenaID)
+    {
+        $this->ResenaID = $resenaID;
+    }
+
     public function getLibroId(): int
     {
         return $this->LibroID;
