@@ -186,6 +186,23 @@ class DAO
         return $datos;
     }
 
+    public static function libroOrdenadoGenero(): array
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM libros ORDER BY genero",
+            []
+        );
+
+        $datos = [];
+
+        foreach ($rs as $fila) {
+            $libro = self::libroCrearDesdeFila($fila);
+            $datos[] = $libro;
+        }
+
+        return $datos;
+    }
+
     public static function libroCrear(
         string $titulo,
         string $ISBN,
@@ -425,4 +442,6 @@ class DAO
             return null;
         }
     }
+
+
 }

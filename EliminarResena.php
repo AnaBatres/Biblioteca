@@ -5,9 +5,9 @@ require_once "RequiresOnce/_Clases.php";
 
 $idResena = $_GET["id"];
 $libroID = DAO::obtenerLibroPorResena($idResena);
-$correcto = DAO::resenaEliminar($idResena);
+$correcto = DAO::resenaEliminar(DAO::resenaObtenerPorId($idResena));
 
-if ($correcto) redireccionar("LibrosShow.php?id=" . $libroID);
+if ($correcto) redireccionar("LibrosShow.php?id=" . $libroID . "&&resenaEliminada");
 
 ?>
 

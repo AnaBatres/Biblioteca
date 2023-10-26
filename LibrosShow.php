@@ -7,7 +7,13 @@ $id=$_REQUEST["id"];
 
 $libros = DAO::libroObtenerPorId($id);
 $resenas = DAO::obtenerResenas($id);
-$usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
+
+if(!sesionIniciada()){
+
+}else{
+    $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
+}
+
 
 ?>
 
@@ -83,12 +89,20 @@ $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
     </style>
 </head>
 <body>
+
+<?php if (isset($_REQUEST["resenaEliminada"])) { ?>
+    <p style="color: red">Su reseña se eliminó correctamente</p>
+<?php } elseif (isset($_REQUEST["error"])) {  ?>
+    <p style="color: red">Inicia sesion para poder valorar el libro</p>
+<?php } ?>
+
     <p>Titulo: <?=$libros->getTitulo()?></p>
     <p>ISBN: <?=$libros->getISBN()?></p>
     <p>Editorial: <?=$libros->getEditorial()?></p>
     <p>Genero: <?=$libros->getGenero()?></p>
     <p>Numero de paginas: <?=$libros->getPaginas()?></p>
     <p>Autor: <?= $libros->obtenerAutor()->getNombre()?></p>
+
 
     <form method="POST" action="Resena.php">
         <input type="hidden" name="libroID" value="<?=$libros->getId()?>">
@@ -108,7 +122,7 @@ $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
         <p>Comentario:</p> <?= $resena->getComentario()?>
         <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>
             <a href="EditarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/editar.png"></a>
-            <a href="ResenaEliminar.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
+            <a href="EliminarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
         <?php } ?>
     <?php } ?>
 </body>
