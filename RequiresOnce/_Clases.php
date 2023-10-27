@@ -360,7 +360,58 @@ class Resena extends Dato implements JsonSerializable
     {
         $this->Comentario = $comentario;
     }
+}
+class Favoritos extends Dato implements JsonSerializable
+{
+    use Identificable;
 
+    private int $libroID;
+    private int $usuarioID;
+
+    public function __construct(int $id, int $libroID, int $usuarioID)
+    {
+        $this->id = $id;
+        $this->libroID = $libroID;
+        $this->usuarioID = $usuarioID;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "libroID" => $this->libroID,
+            "usuarioID" => $this->usuarioID,
+        ];
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    public function getLibroId(): int
+    {
+        return $this->libroID;
+    }
+
+    public function setLibroId(int $libroID)
+    {
+        $this->libroID = $libroID;
+    }
+
+    public function getUsuarioId(): int
+    {
+        return $this->usuarioID;
+    }
+
+    public function setUsuarioId(int $usuarioID)
+    {
+        $this->usuarioID = $usuarioID;
+    }
 
 
 }

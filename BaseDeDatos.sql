@@ -74,4 +74,12 @@ CREATE TABLE IF NOT EXISTS Resenas (
     CONSTRAINT fk_UsuarioID FOREIGN KEY (UsuarioID) REFERENCES Usuario (id) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE favoritos (
+                           id INT AUTO_INCREMENT PRIMARY KEY,
+                           usuarioID INT,
+                           libroID INT,
+                           FOREIGN KEY (usuarioID) REFERENCES usuario(id),
+                           FOREIGN KEY (libroID) REFERENCES libros(LibroID)
+);
+
 COMMIT;

@@ -5,6 +5,7 @@ require_once "RequiresOnce/_Clases.php";
 
 $libros = DAO::libroObtenerTodos();
 
+
 ?>
 
 <!DOCTYPE html>
@@ -37,21 +38,32 @@ $libros = DAO::libroObtenerTodos();
     </ul>
 </div>
 
-    <?php foreach ($libros as $libro) { ?>
-        <div class="contenedor">
-            <div class="titulo-autor">
-                    <a id="titulo" href="LibrosShow.php?id=<?= $libro->getId() ?>"><img src="Imagenes/imagen<?= $libro->getId()?>.jpg" style="width: 180px; height: 230px;"></a>
-                    <div><a href="LibrosShow.php?id=<?= $libro->getId() ?>"><?= $libro->getTitulo() ?></a></div>
-                    <div><a href="AutoresShow.php?id=<?=$libro->getAutorID()?>"><?= DAO::autorObtenerPorId($libro->getAutorID())->getNombre() ?></a></div>
-            </div>
-            <div class="iconos">
-                <?php if ($libro->getCorazon() == 1) { ?>
-                    <a href="Favoritos.php?id=<?= $libro->getId() ?>&corazon=0"><img src="Imagenes/corazonLleno.jpg" style="width: 20px; height: 20px;"></a>
-                <?php } else { ?>
-                    <a href="Favoritos.php?id=<?= $libro->getId() ?>&corazon=1"><img src="Imagenes/corazonVacio.jpg" style="width: 20px; height: 20px;"></a>
-                <?php } ?>
-            </div>
+<?php foreach ($libros as $libro) {
+$esFavorito = false;
+if (DAO::esFavorito($_SESSION['id'], $libro->getId())) {
+    $esFavorito = true;
+}?>
+    <div class="contenedor">
+        <div class="titulo-autor">
+            <a id="titulo" href="LibrosShow.php?id=<?= $libro->getId() ?>"><img src="Imagenes/imagen<?= $libro->getId()?>.jpg" style="width: 180px; height: 230px;"></a>
+            <div><a href="LibrosShow.php?id=<?= $libro->getId() ?>"><?= $libro->getTitulo() ?></a></div>
+            <div><a href="AutoresShow.php?id=<?=$libro->getAutorID()?>"><?= DAO::autorObtenerPorId($libro->getAutorID())->getNombre() ?></a></div>
         </div>
-    <?php } ?>
+        <div class="iconos">
+            <?php if (sesionIniciada()) { ?>
+                <?php if ($esFavorito) { ?>
+
+                    <a href="Favoritos.php?id=<?= $libro->getId() ?>&accion=eliminar">
+                        <img src="Imagenes/corazonLleno.jpg" style="width: 20px; height: 20px;">
+                    </a>
+                <?php } else { ?>
+                    <a href="Favoritos.php?id=<?= $libro->getId() ?>&accion=agregar">
+                        <img src="Imagenes/corazonVacio.jpg" style="width: 20px; height: 20px;">
+                    </a>
+                <?php } ?>
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>
 </body>
 </html>

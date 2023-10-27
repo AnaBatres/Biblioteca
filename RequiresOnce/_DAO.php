@@ -278,6 +278,17 @@ class DAO
         return $sentencia->rowCount() > 0;
     }
 
+    public static function actualizarCorazon(int $usuarioID, int $libroID): bool
+    {
+        $sql = "INSERT INTO favoritos SET usuarioID = ? AND libroID = ?";
+        $conexion = self::obtenerPdoConexionBD();
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute([$usuarioID, $libroID]);
+
+        return $sentencia->rowCount() > 0;
+    }
+
     public static function libroEliminar(Libro $libro): bool
     {
         return self::libroEliminarPorId($libro->getId());
@@ -441,6 +452,87 @@ class DAO
         } else {
             return null;
         }
+    }
+    private static function favoritosCrearDesdeFila(array $fila): Favoritos
+    {
+        return new Favoritos($fila["id"], $fila["usuarioID"], $fila["libroID"]);
+    }
+    public static function favoritosObtenerPorId(int $id): ?Favoritos
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM favoritos WHERE id=?",
+            [$id]
+        );
+
+        if ($rs) {
+            $fila = $rs[0];
+            return self::favoritosCrearDesdeFila($fila);
+        } else {
+            return null;
+        }
+    }
+
+    public static function favoritoCrear(int $libroID, int $usuarioID): ?Favoritos
+    {
+        $idAutogenerado = self::ejecutarInsert(
+            "INSERT INTO favoritos (libroID, usuarioID) VALUES (?,?)",
+            [$libroID, $usuarioID]
+        );
+
+        if ($idAutogenerado == null) return null;
+        else return self::favoritosObtenerPorId($idAutogenerado);
+    }
+
+    public static function favoritoBorrar(int $libroID, int $usuarioID): bool
+    {
+        $filasAfectadas = self::ejecutarUpdel(
+            "DELETE FROM favoritos WHERE libroID=? AND usuarioID=?",
+            [$libroID, $usuarioID]
+        );
+
+        return ($filasAfectadas == 1);
+    }
+
+    public static function favoritosObtener(): array
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM favoritos",
+            []
+        );
+
+        $favoritos = [];
+        foreach ($rs as $fila) {
+            $favorito = self::favoritosCrearDesdeFila($fila);
+            $favoritos[] = $favorito;
+        }
+
+        return $favoritos;
+    }
+
+    public static function listafavoritosObtener(int $usuarioID): array
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT libroID FROM favoritos WHERE usuarioID = ?",
+            [$usuarioID]
+        );
+
+        $favoritos = [];
+        foreach ($rs as $fila) {
+            $libroID = $fila["libroID"];
+            $favoritos[] = $libroID;
+        }
+
+        return $favoritos;
+    }
+
+    public static function esFavorito(int $usuarioID, int $libroID): bool
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM favoritos WHERE usuarioID = ? AND libroID = ?",
+            [$usuarioID, $libroID]
+        );
+
+        return $rs ? true : false;
     }
 
 

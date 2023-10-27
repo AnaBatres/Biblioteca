@@ -4,10 +4,20 @@ require_once "RequiresOnce/_Varios.php";
 require_once "RequiresOnce/_Clases.php";
 
 $id = $_REQUEST["id"];
-$valorCorazon = $_REQUEST["corazon"];
-$correcto = DAO::libroActualizarCorazon($id, $valorCorazon);
+$accion = $_REQUEST["accion"];
 
-if ($correcto) redireccionar("LibrosIndex.php?id=$id&corazonCambiado");
+if (sesionIniciada()) {
+    $usuarioID = $_SESSION['id'];
+
+    if ($accion === "agregar") {
+        $correcto = DAO::favoritoCrear($id, $usuarioID);
+    } elseif ($accion === "eliminar") {
+        $correcto = DAO::favoritoBorrar($id, $usuarioID);
+    }
+}
+
+redireccionar("LibrosIndex.php");
+exit();
 
 ?>
 
