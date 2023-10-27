@@ -23,7 +23,10 @@ $usuario=DAO::usuarioObtenerPorId($id);
     <h2>BIBLIOTECA VIRTUAL</h2>
     <?php
     if(sesionIniciada()){ ?>
-        <a href="Sesiones/SesionCerrar.php">Cerrar Sesion</a>
+            <div class="botones">
+                <a href="EditarPerfil.php">Editar Perfil</a>
+                <a href="Sesiones/SesionCerrar.php">Cerrar Sesion</a>
+            </div>
     <?php } ?>
 </header>
 <div class="menu">
@@ -36,7 +39,10 @@ $usuario=DAO::usuarioObtenerPorId($id);
     </ul>
 </div>
 
-    <p>Nombre de Usuario: <?=$usuario->getNombre()?></p>
+<div class="contenedor3">
+    <p>Nombre de Usuario: <?=$usuario->getUsuario()?></p>
+    <p>Nombre: <?=$usuario->getNombre()?></p>
+</div>
 
 </body>
 </html>

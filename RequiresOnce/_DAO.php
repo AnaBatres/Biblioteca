@@ -140,7 +140,6 @@ class DAO
             return self::autorEliminarPorId($autor->getId());
     }
 
-
     private static function libroCrearDesdeFila(array $fila): Libro
     {
         return new Libro(
@@ -509,17 +508,17 @@ class DAO
         return $favoritos;
     }
 
-    public static function listafavoritosObtener(int $usuarioID): array
+    public static function listaFavoritosObtener(int $usuarioID): array
     {
         $rs = self::ejecutarConsulta(
-            "SELECT libroID FROM favoritos WHERE usuarioID = ?",
+            "SELECT * FROM Libros INNER JOIN favoritos ON Libros.LibroID = favoritos.LibroID WHERE favoritos.usuarioID = ?",
             [$usuarioID]
         );
 
         $favoritos = [];
         foreach ($rs as $fila) {
-            $libroID = $fila["libroID"];
-            $favoritos[] = $libroID;
+            $libro = self::libroCrearDesdeFila($fila);
+            $favoritos[] = $libro;
         }
 
         return $favoritos;

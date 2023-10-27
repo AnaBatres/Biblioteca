@@ -138,3 +138,95 @@ a{
     border-radius: 8px;
     box-shadow: 0px 1px 10px #9e5f0a;
 }
+
+
+/*LIBROSSHOW*/
+
+.contenedor2 body, h1, h2, p, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para el cuerpo de la página */
+.contenedor2 body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Estilo para el encabezado */
+.contenedor2 h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Estilo para los párrafos */
+.contenedor2 p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo para el formulario */
+.contenedor2 form {
+    margin-top: 20px;
+}
+
+/* Estilo para etiquetas de formulario */
+.contenedor2 label {
+    font-weight: bold;
+}
+
+/* Estilo para campos de entrada de formulario */
+.contenedor2 input[type="number"],
+textarea {
+    width: 2%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contenedor2 input[type="text"],
+textarea {
+    height: 50px;
+    width: 30%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+/* Estilo para el botón de envío del formulario */
+.contenedor2 input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.contenedor2 input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/*PERFIL*/
+
+.contenedor3 {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+/* Estilos para los enlaces en el área de contenido */
+.contador3 a {
+    text-decoration: none;
+    color: #0078d4;
+}
+
+.contador3 a:hover {
+    text-decoration: underline;
+}
