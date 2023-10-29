@@ -8,9 +8,7 @@ $id=$_REQUEST["id"];
 $libros = DAO::libroObtenerPorId($id);
 $resenas = DAO::obtenerResenas($id);
 
-if(!sesionIniciada()){
-
-}else{
+if(sesionIniciada()) {
     $usuario = DAO::usuarioObtenerPorId($usuarioID = $_SESSION['id']);
 }
 
@@ -56,13 +54,16 @@ if(!sesionIniciada()){
     </form>
 
     <h2>Reseñas:</h2>
+
     <?php foreach ($resenas as $resena)  {?>
         <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
         <p>Calificación:      <img style="width: 50px; height: 10px;" src="Imagenes/estrella<?= $resena->getCalificacion()?>.png"></p>
         <p>Comentario:</p> <?= $resena->getComentario()?>
-        <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>
-            <a href="EditarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/editar.png"></a>
-            <a href="EliminarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
+        <?php if(sesionIniciada()) { ?>
+            <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>
+                <a href="EditarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/editar.png"></a>
+                <a href="EliminarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
+            <?php } ?>
         <?php } ?>
     <?php } ?>
 </body>

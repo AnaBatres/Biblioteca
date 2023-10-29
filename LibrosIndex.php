@@ -23,7 +23,6 @@ $libros = DAO::libroObtenerTodos();
     <?php
     if(sesionIniciada()){ ?>
            <a href="Perfil.php">Mi Perfil</a>
-<!--        <a href="Sesiones/SesionCerrar.php">Cerrar Sesion</a>-->
     <?php } else { ?>
         <a href="Sesiones/SesionFormulario.php">Inicio Sesion</a>
     <?php } ?>
@@ -39,9 +38,11 @@ $libros = DAO::libroObtenerTodos();
 </div>
 
 <?php foreach ($libros as $libro) {
-$esFavorito = false;
-if (DAO::esFavorito($_SESSION['id'], $libro->getId())) {
-    $esFavorito = true;
+if (sesionIniciada()){
+    $esFavorito = false;
+    if (DAO::esFavorito($_SESSION['id'], $libro->getId())) {
+        $esFavorito = true;
+}
 }?>
     <div class="contenedor">
         <div class="titulo-autor">
@@ -57,7 +58,7 @@ if (DAO::esFavorito($_SESSION['id'], $libro->getId())) {
                         <img src="Imagenes/corazonLleno.jpg" style="width: 20px; height: 20px;">
                     </a>
                 <?php } else { ?>
-                    <a href="Favoritos.php?id=<?= $libro->getId() ?>&accion=agregar">
+                    <a href="Favoritos.php?id=<?= $libro->getId() ?>&accion=insertar">
                         <img src="Imagenes/corazonVacio.jpg" style="width: 20px; height: 20px;">
                     </a>
                 <?php } ?>

@@ -12,19 +12,19 @@ require_once "../RequiresOnce/_DAO.php";
     $rcontrasenna=$_POST['rcontrasenna'];
 
     if(empty($usuario)){
-        redireccionar('RegistroComprobar.php?error=El usuario es requerido');
+        redireccionar('Registro.php?error=El usuario es requerido');
         exit();
     }elseif (empty($nombre)){
-        redireccionar('RegistroComprobar.php?error=El nombre es requerido');
+        redireccionar('Registro.php?error=El nombre es requerido');
         exit();
     }elseif (empty($contrasenna)){
-        redireccionar('RegistroComprobar.php?error=La contraseña es requerida');
+        redireccionar('Registro.php?error=La contraseña es requerida');
         exit();
     }elseif(empty($rcontrasenna)){
-        redireccionar('RegistroComprobar.php?error=Repetir la contraseña es requerido');
+        redireccionar('Registro.php?error=Repetir la contraseña es requerido');
         exit();
     }elseif ($contrasenna != $rcontrasenna){
-        redireccionar('RegistroComprobar.php?error=La contraseña no coincide');
+        redireccionar('Registro.php?error=La contraseña no coincide');
         exit();
     }else{
 

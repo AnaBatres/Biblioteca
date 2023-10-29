@@ -58,10 +58,13 @@ header a {
     margin-right: 30px;
 }
 
-header a:hover {
+header  a:hover {
     background-color: #e74c3c;
 }
 
+.titulo-autor a:hover{
+    background-color: #e74c3c;
+}
 /* Estilos para el menú de navegación */
 .menu {
     background-color: white;
@@ -230,3 +233,70 @@ textarea {
 .contador3 a:hover {
     text-decoration: underline;
 }
+
+
+/*REGISTRO*/
+ contenedor4 body {
+     font-family: Arial, sans-serif;
+     background-color: #f4f4f4;
+     margin: 0;
+     padding: 0;
+ }
+
+.contenedor4 {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor4 h1 {
+    color: #333;
+    text-align: center;
+}
+
+.contenedor4 form {
+    margin-top: 20px;
+}
+
+.contenedor4 label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.contenedor4 input {
+    width: 95%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contenedor4 button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+}
+
+.contenedor4 button:hover {
+    background-color: #0056b3;
+}
+
+.contenedor4 a{
+        text-decoration: none;
+        color: #007bff;
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+}
+

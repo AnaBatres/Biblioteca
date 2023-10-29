@@ -377,6 +377,17 @@ class DAO
         else return self::usuarioObtenerPorId($idAutogenerado);
     }
 
+    public static function usuarioActualizar(Usuario $usuario): ?Usuario
+    {
+        $filasAfectadas = self::ejecutarUpdel(
+            "UPDATE usuario SET nombre=?, usuario=?, contrasenna=? WHERE id=?",
+            [$usuario->getNombre(), $usuario->getUsuario(), $usuario->getContrasenna(), $usuario->getId()]
+        );
+
+        if ($filasAfectadas === null) return null;
+        else return $usuario;
+    }
+
     private static function resenaCrearDesdeFila(array $fila): Resena
     {
         return new Resena($fila["ResenaID"], $fila["LibroID"], $fila["UsuarioID"], $fila["Calificacion"], $fila["Comentario"]);

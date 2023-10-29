@@ -9,7 +9,7 @@ $accion = $_REQUEST["accion"];
 if (sesionIniciada()) {
     $usuarioID = $_SESSION['id'];
 
-    if ($accion === "agregar") {
+    if ($accion === "insertar") {
         $correcto = DAO::favoritoCrear($id, $usuarioID);
     } elseif ($accion === "eliminar") {
         $correcto = DAO::favoritoBorrar($id, $usuarioID);
