@@ -58,7 +58,7 @@ if(sesionIniciada()) {
     <form method="POST" action="Resena.php">
         <input type="hidden" name="libroID" value="<?=$libros->getId()?>">
         <label for="calificacion">Calificación (1-5):</label>
-        <input type="number" name="calificacion" min="1" max="5" required>
+        <input type="number" name="calificacion" max="5" required>
         <br>
         <label for="comentario">Comentario:</label>
         <input type="text" name="comentario" required>
@@ -70,7 +70,7 @@ if(sesionIniciada()) {
 
     <?php foreach ($resenas as $resena)  {?>
         <p>Usuario: <?= DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre()?></p>
-        <p>Calificación:      <img style="width: 50px; height: 10px;" src="Imagenes/estrella<?= $resena->getCalificacion()?>.png"></p>
+        <p>Calificación: <img src="Imagenes/estrella<?= $resena->getCalificacion()?>.png"></p>
         <p>Comentario:</p> <?= $resena->getComentario()?>
         <?php if(sesionIniciada()) { ?>
             <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>

@@ -11,7 +11,7 @@ function destuirSesion()
 }
 function entrarSiSesionIniciada()
 {
-    if (comprobarRenovarSesion()) redireccionar("PersonasListado.php");
+    if (comprobarRenovarSesion()) redireccionar("LibrosIndex.php");
 }
 
 function salirSiSesionFalla()
