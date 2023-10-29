@@ -27,10 +27,10 @@
         <input type="text" name="usuario" id="usuario" required>
 
         <label for="contrasenna">Contraseña</label>
-        <input type="password" name="contrasenna" id="contrasenna" required>
+        <input type="password" name="contrasenna" id="contrasenna" required pattern=".{4,}" title="La contraseña debe tener al menos 4 caracteres">
 
         <label for="rcontrasenna">Repite la contraseña</label>
-        <input type="password" name="rcontrasenna" id="rcontrasenna" required>
+        <input type="password" name="rcontrasenna" id="rcontrasenna" required pattern=".{4,}">
 
         <button type="submit">Registrarse</button>
         <a type="submit" href="SesionFormulario.php" >Iniciar Sesion</a>
@@ -38,7 +38,10 @@
         <br>
         <br>
         <?php if (isset($_REQUEST["error"])) { ?>
-            <h3 style="color: red">Fallo en el registro, intentelo de nuevo</h3>
+            <h3 style="color: red">Completa todos los campos</h3>
+        <?php } ?>
+        <?php if (isset($_REQUEST["error2"])) { ?>
+            <h3 style="color: red">Las contraseñas no coinciden</h3>
         <?php } ?>
         <?php if (isset($_REQUEST["success"])) { ?>
             <h3 style="color: green">Usuario registrado correctamente</h3>

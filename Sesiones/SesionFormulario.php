@@ -28,11 +28,19 @@ if (sesionIniciada()) {
 <?php } ?>
 
 <form action="SesionComprobar.php" method="post">
+
+    <?php if(isset($_COOKIE["usuario"]) && isset($_COOKIE["contrasenna"])) { ?>
+    <label for='usuario'>Usuario</label><br>
+    <input type="text" name="usuario" value="<?php echo $_COOKIE["usuario"]?>"><br><br>
+    <label for='contrasenna'>Contraseña</label><br>
+    <input type="password" name="contrasenna" value="<?php echo $_COOKIE["contrasenna"]?>"><br><br>
+    <?php } else {?>
     <label for='usuario'>Usuario</label><br>
     <input type="text" name="usuario"><br><br>
     <label for='contrasenna'>Contraseña</label><br>
     <input type="password" name="contrasenna"><br><br>
     <input type='checkbox' name='recuerdame'>Recuérdame<br><br>
+    <?php } ?>
 
     <input type="submit" name="enviar">
     <a href="Registro.php">Registrarse</a>

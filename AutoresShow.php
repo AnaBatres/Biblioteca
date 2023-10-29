@@ -1,7 +1,5 @@
 <?php
-require_once "RequiresOnce/_DAO.php";
-require_once "RequiresOnce/_Varios.php";
-require_once "RequiresOnce/_Clases.php";
+require_once "RequiresOnce/General.php";
 
 $id=$_REQUEST["id"];
 

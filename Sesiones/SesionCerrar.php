@@ -1,8 +1,7 @@
 <?php
 require_once "../RequiresOnce/General.php";
 
-
-session_destroy();
-unset($_SESSION);
-
+if(sesionIniciada()){
+    destuirSesion();
+}
 redireccionar("SesionFormulario.php");

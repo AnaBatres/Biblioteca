@@ -2,8 +2,6 @@
 
 require_once "../RequiresOnce/General.php";
 
-
-
     $usuario=$_POST['usuario'];
     $nombre=$_POST['nombre'];
     $contrasenna=$_POST['contrasenna'];
@@ -22,7 +20,7 @@ require_once "../RequiresOnce/General.php";
         redireccionar('Registro.php?error=Repetir la contraseña es requerido');
         exit();
     }elseif ($contrasenna != $rcontrasenna){
-        redireccionar('Registro.php?error=La contraseña no coincide');
+        redireccionar('Registro.php?error2=La contraseña no coincide');
         exit();
     }else{
 

@@ -1,7 +1,6 @@
 <?php
 require_once "RequiresOnce/General.php";
 
-
 $libros = DAO::libroObtenerTodos();
 
 

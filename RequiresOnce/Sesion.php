@@ -3,8 +3,12 @@
 
 declare(strict_types=1);
 
-session_start();
 
+function destuirSesion()
+{
+    session_destroy();
+    unset($_SESSION);
+}
 function entrarSiSesionIniciada()
 {
     if (comprobarRenovarSesion()) redireccionar("PersonasListado.php");

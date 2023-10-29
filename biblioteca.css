@@ -33,7 +33,7 @@ header a {
 }
 
 header a:hover {
-    color: #f39c12;
+    background-color: #b1500c;
 }
 
 .titulo-autor a:hover{
