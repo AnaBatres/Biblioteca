@@ -60,7 +60,7 @@ if(sesionIniciada()) {
         <label for="calificacion">Calificación (1-5):</label>
         <input type="number" name="calificacion" max="5" required>
         <br>
-        <label for="comentario">Comentario:</label>
+        <label for="comentario">Comentario:</label> 
         <input type="text" name="comentario" required>
         <br>
         <input type="submit" value="Enviar Reseña">

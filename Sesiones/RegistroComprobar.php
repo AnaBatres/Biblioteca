@@ -6,6 +6,7 @@ require_once "../RequiresOnce/General.php";
     $nombre=$_POST['nombre'];
     $contrasenna=$_POST['contrasenna'];
     $rcontrasenna=$_POST['rcontrasenna'];
+    $rol="usuario";
 
     if(empty($usuario)){
         redireccionar('Registro.php?error=El usuario es requerido');
@@ -24,7 +25,7 @@ require_once "../RequiresOnce/General.php";
         exit();
     }else{
 
-        if($usuario = DAO::usuarioCrear($nombre,$usuario, $contrasenna)){
+        if($usuario = DAO::usuarioCrear($nombre,$usuario, $contrasenna, $rol)){
             redireccionar('Registro.php?success="Usuario creado correctamente"');
         }else{
             redireccionar('Registro.php?error="Error al registrarse"');

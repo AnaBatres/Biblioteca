@@ -2,9 +2,7 @@
     require_once "RequiresOnce/General.php";
 
     $libros = DAO::libroObtenerTodos();
-
-
-
+    $rol = DAO::usuarioObtenerRol($_SESSION["id"]);
     ?>
 
     <!DOCTYPE html>
@@ -29,7 +27,9 @@
     <div class="menu">
         <ul>
             <li><a href="LibrosIndex.php">Inicio</a></li>
+            <?php if($rol != "admin") {?>
             <li><a href="FavoritosIndex.php">Mis favoritos</a></li>
+            <?php } ?>
         </ul>
     </div>
 
@@ -47,12 +47,15 @@
                 <div><a href="AutoresShow.php?id=<?=$libro->getAutorID()?>"><?= DAO::autorObtenerPorId($libro->getAutorID())->getNombre() ?></a></div>
             </div>
             <div class="iconos">
-                <?php if (sesionIniciada()) { ?>
+                <?php if (sesionIniciada() && $rol !== "admin") { ?>
                     <?php if ($esFavorito) { ?>
                         <a href="Favoritos.php?id=<?= $libro->getId() ?>&accion=eliminar"><img src="Imagenes/corazonLleno.jpg"></a>
                     <?php } else { ?>
                         <a href="Favoritos.php?id=<?= $libro->getId() ?>&accion=insertar"><img src="Imagenes/corazonVacio.jpg"></a>
                     <?php } ?>
+                <?php } else { ?>
+                <a href="EliminarLibro.php?id=<?= $libro->getId() ?>&accion=eliminar"><img src="Imagenes/basura.jpg"></a>
+                <a href="EditarLibro.php?id=<?= $libro->getId() ?>&accion=editar"><img src="Imagenes/editar.png"></a>
                 <?php } ?>
             </div>
         </div>

@@ -54,7 +54,7 @@ $usuario=DAO::usuarioObtenerPorId($id);
     <br>
     <br>
     <label for='contrasenaActual'>Contraseña actual</label>
-    <input type='password' id='contrasenaActual' name='contrasenaActual' required />
+    <input type='password' id='contrasenaActual' name='contrasenaActual'  required />
     <br>
     <br>
     <label for='contrasenaNueva'>Contraseña nueva</label>

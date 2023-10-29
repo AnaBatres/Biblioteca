@@ -9,13 +9,15 @@ $nombre = $_POST["nombre"];
 $contrasenaActual = $_POST["contrasenaActual"];
 $contrasenaNueva = $_POST["contrasenaNueva"];
 $rContrasenaNueva = $_POST["rContrasenaNueva"];
+$rol = $usuarioActual->getRol();
+
 
 $correcto = true;
 
 if ($contrasenaNueva === $rContrasenaNueva) {
     $usuarioActual = DAO::usuarioObtenerPorId($id);
     if ($usuarioActual && $usuarioActual->getContrasenna() === $contrasenaActual) {
-        $usuarioNuevo = new Usuario($id, $nombre, $usuario, $contrasenaNueva);
+        $usuarioNuevo = new Usuario($id, $nombre, $usuario, $contrasenaNueva,$rol);
         $usuarioNuevo = DAO::usuarioActualizar($usuarioNuevo);
         if ($usuarioNuevo) {
             redireccionar("Perfil.php");

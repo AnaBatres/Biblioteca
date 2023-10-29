@@ -73,8 +73,6 @@ class Libro extends Dato implements JsonSerializable
     private string $genero;
     private int $paginas;
     private string $idioma;
-    private int $corazon;
-    private int $valoracion;
     private int $autorID;
 
     public function __construct(
@@ -85,8 +83,6 @@ class Libro extends Dato implements JsonSerializable
         string $genero,
         int    $paginas,
         string $idioma,
-        int    $corazon,
-        int    $valoracion,
         int    $autorID
     )
     {
@@ -97,8 +93,6 @@ class Libro extends Dato implements JsonSerializable
         $this->genero = $genero;
         $this->paginas = $paginas;
         $this->idioma = $idioma;
-        $this->corazon = $corazon;
-        $this->valoracion = $valoracion;
         $this->autorID = $autorID;
     }
 
@@ -112,8 +106,6 @@ class Libro extends Dato implements JsonSerializable
             "genero" => $this->genero,
             "paginas" => $this->paginas,
             "idioma" => $this->idioma,
-            "corazon" => $this->corazon,
-            "valoracion" => $this->valoracion,
             "autorID" => $this->autorID,
         ];
     }
@@ -173,26 +165,6 @@ class Libro extends Dato implements JsonSerializable
         return $this->idioma;
     }
 
-    public function setCorazon(int $corazon)
-    {
-        $this->corazon = $corazon;
-    }
-
-    public function getCorazon(): int
-    {
-        return $this->corazon;
-    }
-
-    public function setValoracion(int $valoracion)
-    {
-        $this->valoracion = $valoracion;
-    }
-
-    public function getValoracion(): int
-    {
-        return $this->valoracion;
-    }
-
     public function setAutorID(int $autorID)
     {
         $this->autorID = $autorID;
@@ -234,12 +206,15 @@ class Usuario extends Dato implements JsonSerializable
     private string $usuario;
     private string $contrasenna;
 
-    public function __construct(int $id, string $nombre, string $usuario, string $contrasenna)
+    private string $rol;
+
+    public function __construct(int $id, string $nombre, string $usuario, string $contrasenna, string $rol)
     {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->usuario = $usuario;
         $this->contrasenna = $contrasenna;
+        $this->rol = $rol;
     }
 
     public function jsonSerialize()
@@ -249,6 +224,7 @@ class Usuario extends Dato implements JsonSerializable
             "nombre" => $this->nombre,
             "usuario" => $this->usuario,
             "contrasenna" => $this->contrasenna,
+            "rol" => $this->rol,
         ];
     }
 
@@ -281,6 +257,17 @@ class Usuario extends Dato implements JsonSerializable
     {
         $this->contrasenna = $contrasenna;
     }
+
+    public function getRol(): string
+    {
+        return $this->rol;
+    }
+
+    public function setRol(string $rol)
+    {
+        $this->rol = $rol;
+    }
+
 }
 class Resena extends Dato implements JsonSerializable
 {

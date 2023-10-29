@@ -151,9 +151,7 @@ class DAO
             $fila["Genero"],
             $fila["Paginas"],
             $fila["Idioma"],
-            $fila["corazon"],
-            $fila["valoracion"],
-            $fila["AutorID"]
+            $fila["AutorID"],
         );
     }
 
@@ -229,13 +227,11 @@ class DAO
         string $genero,
         int    $paginas,
         string $idioma,
-        int    $autorID,
-        int    $corazon,
-        int    $valoracion
+        int    $autorID
     ): ?Libro
     {
         $idAutogenerado = self::ejecutarInsert(
-            "INSERT INTO Libros (Titulo, ISBN, Editorial, Genero, Paginas, Idioma, AutorID, corazon, valoracion) 
+            "INSERT INTO Libros (Titulo, ISBN, Editorial, Genero, Paginas, Idioma, AutorID) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [
                 $titulo,
@@ -244,9 +240,7 @@ class DAO
                 $genero,
                 $paginas,
                 $idioma,
-                $autorID,
-                $corazon,
-                $valoracion
+                $autorID
             ]
         );
 
@@ -257,7 +251,7 @@ class DAO
     public static function libroActualizar(Libro $libro): ?Libro
     {
         $filasAfectadas = self::ejecutarUpdel(
-            "UPDATE Libros SET Titulo=?, ISBN=?, Editorial=?, Genero=?, Paginas=?, Idioma=?, AutorID=?, corazon=?, valoracion=? WHERE LibroID=?",
+            "UPDATE Libros SET Titulo=?, ISBN=?, Editorial=?, Genero=?, Paginas=?, Idioma=?, AutorID=? WHERE LibroID=?",
             [
                 $libro->getTitulo(),
                 $libro->getISBN(),
@@ -266,8 +260,6 @@ class DAO
                 $libro->getPaginas(),
                 $libro->getIdioma(),
                 $libro->getAutorID(),
-                $libro->getCorazon(),
-                $libro->getValoracion(),
                 $libro->getId()
             ]
         );
@@ -319,7 +311,7 @@ class DAO
         $datos = [];
 
         $rs = self::ejecutarConsulta(
-            "SELECT Libros.LibroID, Libros.Titulo, Libros.ISBN, Libros.Editorial, Libros.Genero, Libros.Paginas, Libros.Idioma, Libros.AutorID, Libros.corazon, Libros.valoracion, autores.nombre as autorNombre
+            "SELECT Libros.LibroID, Libros.Titulo, Libros.ISBN, Libros.Editorial, Libros.Genero, Libros.Paginas, Libros.Idioma, Libros.AutorID, autores.nombre as autorNombre
             FROM Libros
             INNER JOIN Autores ON Libros.AutorID = Autores.AutorID",
             []
@@ -353,7 +345,7 @@ class DAO
 
     private static function usuarioCrearDesdeFila(array $fila): Usuario
     {
-        return new Usuario($fila["id"], $fila["nombre"], $fila["usuario"], $fila["contrasenna"]);
+        return new Usuario($fila["id"], $fila["nombre"], $fila["usuario"], $fila["contrasenna"], $fila["rol"]);
     }
 
     public static function usuarioObtener(string $usuario, string $contrasenna): ?Usuario
@@ -366,6 +358,20 @@ class DAO
         if ($rs) {
             $fila = $rs[0];
             return self::usuarioCrearDesdeFila($fila);
+        } else {
+            return null;
+        }
+    }
+
+    public static function usuarioObtenerRol($id) {
+        $rs = self::ejecutarConsulta(
+            "SELECT rol FROM usuario WHERE id= ?",
+            [$id]
+        );
+
+        if ($rs) {
+            $fila = $rs[0];
+            return $fila["rol"];
         } else {
             return null;
         }
@@ -386,11 +392,11 @@ class DAO
         }
     }
 
-    public static function usuarioCrear(string $nombre, string $usuario, string $contrasenna): ?Usuario
+    public static function usuarioCrear(string $nombre, string $usuario, string $contrasenna, string $rol): ?Usuario
     {
         $idAutogenerado = self::ejecutarInsert(
-            "INSERT INTO usuario (nombre,usuario,contrasenna) VALUES (?, ?,?)",
-            [$nombre, $usuario, $contrasenna]
+            "INSERT INTO usuario (nombre,usuario,contrasenna, rol) VALUES (?, ?,?, ?)",
+            [$nombre, $usuario, $contrasenna, $rol]
         );
 
         if ($idAutogenerado == null) return null;
@@ -407,6 +413,8 @@ class DAO
         if ($filasAfectadas === null) return null;
         else return $usuario;
     }
+
+
 
     private static function resenaCrearDesdeFila(array $fila): Resena
     {

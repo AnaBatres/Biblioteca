@@ -10,7 +10,4 @@ if(isset($_COOKIE["usuarioID"])){
     setcookie("usuarioID", "", time() - 3600);
 }
 
-
-
-
 redireccionar("SesionFormulario.php");
