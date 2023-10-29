@@ -33,9 +33,6 @@ $usuario=DAO::usuarioObtenerPorId($id);
     <ul>
         <li><a href="LibrosIndex.php">Inicio</a></li>
         <li><a href="FavoritosIndex.php">Mis favoritos</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Acerca de</a></li>
-        <li><a href="#">Contacto</a></li>
     </ul>
 </div>
 

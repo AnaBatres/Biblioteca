@@ -3,7 +3,10 @@ require_once "RequiresOnce/_Varios.php";
 require_once "RequiresOnce/_Clases.php";
 require_once "RequiresOnce/_DAO.php";
 
-$libros = DAO::listaFavoritosObtener($_SESSION['id']);
+if(sesionIniciada()){
+    $libros = DAO::listaFavoritosObtener($_SESSION['id']);
+}
+
 
 ?>
 
@@ -19,27 +22,19 @@ $libros = DAO::listaFavoritosObtener($_SESSION['id']);
     <title>Document</title>
 </head>
 <body>
+<?php if(sesionIniciada()){ ?>
 <header>
     <h2>BIBLIOTECA VIRTUAL</h2>
-    <?php
-    if(sesionIniciada()){ ?>
         <a href="Perfil.php">Mi Perfil</a>
-        <!--        <a href="Sesiones/SesionCerrar.php">Cerrar Sesion</a>-->
-    <?php } else { ?>
-        <a href="Sesiones/SesionFormulario.php">Inicio Sesion</a>
-    <?php } ?>
 </header>
 <div class="menu">
     <ul>
         <li><a href="LibrosIndex.php">Inicio</a></li>
         <li><a href="FavoritosIndex.php">Mis favoritos</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Acerca de</a></li>
-        <li><a href="#">Contacto</a></li>
     </ul>
 </div>
 
-<?php foreach ($libros as $libro) { ?>
+    <?php foreach ($libros as $libro) { ?>
     <div class="contenedor">
         <div class="titulo-autor">
             <a id="titulo" href="LibrosShow.php?id=<?= $libro->getId() ?>"><img src="Imagenes/imagen<?= $libro->getId()?>.jpg" style="width: 180px; height: 230px;"></a>
@@ -48,6 +43,9 @@ $libros = DAO::listaFavoritosObtener($_SESSION['id']);
         </div>
     </div>
 <?php } ?>
-
+<?php } else { ?>
+    <h3 style="color: red">Inicia sesión para acceder a tus favoritos</h3>
+    <a href="LibrosIndex.php">Volver a la página principal</a>
+<?php } ?>
 </body>
 </html>

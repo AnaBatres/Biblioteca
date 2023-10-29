@@ -3,31 +3,6 @@
     padding: 0;
 }
 
-.search-form {
-    margin: 20px 0;
-}
-
-/* Estilo personalizado para el campo de entrada */
-.search-input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    width: 70%;
-}
-
-/* Estilo personalizado para el botón de búsqueda */
-.search-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-}
-
-.search-button:hover {
-    background-color: #0056b3;
-}
-
 /*MENU Y HEADER*/
 
 header {
@@ -47,7 +22,6 @@ header h2 {
     margin-left: 41%;
 }
 
-/* Estilos para el enlace del botón de inicio de sesión */
 header a {
     background-color: #f39c12;
     color: #fff;
@@ -58,16 +32,16 @@ header a {
     margin-right: 30px;
 }
 
-header  a:hover {
-    background-color: #e74c3c;
+header a:hover {
+    color: #f39c12;
 }
 
 .titulo-autor a:hover{
-    background-color: #e74c3c;
+   color: #f39c12;
 }
-/* Estilos para el menú de navegación */
+
 .menu {
-    background-color: white;
+    background-color: #d3d1ce;
     text-align: center;
     padding: 10px 0;
 }
@@ -93,12 +67,11 @@ header  a:hover {
     color: #f39c12;
 }
 
-body{
+.indice{
     background: url("Imagenes/fondo.jpg") center center / cover fixed;
-
 }
 
-body:before{
+.indice:before{
     content: '';
     left: 0;
     top: 0;
@@ -109,9 +82,6 @@ body:before{
     filter: blur(5px) brightness(.8);
     z-index: -100;
 }
-
-
-
 
 
 .contenedor{
@@ -139,7 +109,7 @@ a{
 
 .titulo-autor img{
     border-radius: 8px;
-    box-shadow: 0px 1px 10px #9e5f0a;
+    box-shadow: 0px 1px 10px #333333;
 }
 
 
@@ -148,40 +118,35 @@ a{
 .contenedor2 body, h1, h2, p, form {
     margin: 0;
     padding: 0;
+
 }
 
-/* Estilo para el cuerpo de la página */
 .contenedor2 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
-/* Estilo para el encabezado */
+
 .contenedor2 h1 {
     font-size: 24px;
     color: #333;
 }
 
-/* Estilo para los párrafos */
 .contenedor2 p {
     font-size: 16px;
     color: #333;
 }
 
-/* Estilo para el formulario */
 .contenedor2 form {
     margin-top: 20px;
 }
 
-/* Estilo para etiquetas de formulario */
 .contenedor2 label {
     font-weight: bold;
 }
 
-/* Estilo para campos de entrada de formulario */
 .contenedor2 input[type="number"],
 textarea {
     width: 2%;
@@ -200,7 +165,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-/* Estilo para el botón de envío del formulario */
+
 .contenedor2 input[type="submit"] {
     background-color: #007bff;
     color: #fff;
@@ -224,7 +189,6 @@ textarea {
     border-radius: 5px;
 }
 
-/* Estilos para los enlaces en el área de contenido */
 .contador3 a {
     text-decoration: none;
     color: #0078d4;
@@ -300,3 +264,89 @@ textarea {
         text-align: center;
 }
 
+
+/*AUTORESSHOW*/
+
+.contenedor5 {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Añadido para centrar el contenido */
+}
+
+.contenedor5 table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.contenedor5 th, .contenedor5 td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.contenedor5 th {
+    background-color: #f0f0f0;
+}
+
+.contenedor5 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.contenedor5 tr:hover {
+    background-color: #ddd;
+}
+
+
+/*SESIONFORMULARIO*/
+
+.contenedor6 body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.contenedor6 h1 {
+    color: red;
+}
+
+.contenedor6 form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contenedor6 label {
+    font-weight: bold;
+}
+
+.contenedor6 input[type="text"],
+.contenedor6 input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contenedor6 input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contenedor6 a {
+    text-decoration: none;
+    color: #007bff;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}

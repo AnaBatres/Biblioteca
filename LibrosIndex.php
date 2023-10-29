@@ -1,7 +1,6 @@
 <?php
-require_once "RequiresOnce/_DAO.php";
-require_once "RequiresOnce/_Varios.php";
-require_once "RequiresOnce/_Clases.php";
+require_once "RequiresOnce/General.php";
+
 
 $libros = DAO::libroObtenerTodos();
 
@@ -17,7 +16,7 @@ $libros = DAO::libroObtenerTodos();
     <title>LibrosIndex</title>
     <link rel="stylesheet" href="biblioteca.css">
 </head>
-<body>
+<body class="indice">
 <header>
     <h2>BIBLIOTECA VIRTUAL</h2>
     <?php
@@ -31,9 +30,6 @@ $libros = DAO::libroObtenerTodos();
     <ul>
         <li><a href="LibrosIndex.php">Inicio</a></li>
         <li><a href="FavoritosIndex.php">Mis favoritos</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Acerca de</a></li>
-        <li><a href="#">Contacto</a></li>
     </ul>
 </div>
 

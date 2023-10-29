@@ -25,8 +25,23 @@ if(sesionIniciada()) {
     <link rel="stylesheet" href="biblioteca.css">
     <title>LibrosShow</title>
 </head>
-<div class="contenedor2">
 <body>
+<div class="contenedor2">
+<header>
+    <h2>BIBLIOTECA VIRTUAL</h2>
+    <?php
+    if(sesionIniciada()){ ?>
+        <a href="Perfil.php">Mi Perfil</a>
+    <?php } else { ?>
+        <a href="Sesiones/SesionFormulario.php">Inicio Sesion</a>
+    <?php } ?>
+</header>
+<div class="menu">
+    <ul>
+        <li><a href="LibrosIndex.php">Inicio</a></li>
+        <li><a href="FavoritosIndex.php">Mis favoritos</a></li>
+    </ul>
+</div>
 
 <?php if (isset($_REQUEST["resenaEliminada"])) { ?>
     <p style="color: red">Su reseña se eliminó correctamente</p>
@@ -61,12 +76,11 @@ if(sesionIniciada()) {
         <p>Comentario:</p> <?= $resena->getComentario()?>
         <?php if(sesionIniciada()) { ?>
             <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>
-                <a href="EditarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/editar.png"></a>
                 <a href="EliminarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
             <?php } ?>
         <?php } ?>
     <?php } ?>
+</div>
 </body>
-    </div>
 </html>
 

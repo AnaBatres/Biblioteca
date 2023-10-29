@@ -140,6 +140,7 @@ class DAO
             return self::autorEliminarPorId($autor->getId());
     }
 
+
     private static function libroCrearDesdeFila(array $fila): Libro
     {
         return new Libro(
@@ -157,6 +158,7 @@ class DAO
     }
 
 
+
     public static function libroObtenerPorId(int $id): ?Libro
     {
         $rs = self::ejecutarConsulta(
@@ -167,6 +169,24 @@ class DAO
         if ($rs) return self::libroCrearDesdeFila($rs[0]);
         else return null;
     }
+
+    public static function libroObtenerPorAutor(string $autor): array
+    {
+        $libros = array();
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM Libros WHERE AutorID=?",
+            [$autor]
+        );
+
+        if ($rs) {
+            foreach ($rs as $fila) {
+                $libros[] = self::libroCrearDesdeFila($fila);
+            }
+        }
+
+        return $libros;
+    }
+
 
     public static function libroObtenerTodos(): array
     {
