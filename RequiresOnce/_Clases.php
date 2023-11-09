@@ -178,22 +178,18 @@ class Libro extends Dato implements JsonSerializable
     public function obtenerAutor(): Autor
     {
         if ($this->autorID == null) {
-            // Si el autorID es nulo, retornamos un objeto Autor vacío o manejarlo como prefieras.
             return new Autor();
         }
 
-        // Llamamos a la función DAO para obtener el autor por ID.
         return DAO::autorObtenerPorId($this->autorID);
     }
 
     public function obtenerResena(): Resena
     {
         if ($this->ResenaID == null) {
-            // Si el autorID es nulo, retornamos un objeto Autor vacío o manejarlo como prefieras.
             return new Resena();
         }
 
-        // Llamamos a la función DAO para obtener el autor por ID.
         return DAO::resenaObtenerPorId($this->ResenaID);
     }
 }

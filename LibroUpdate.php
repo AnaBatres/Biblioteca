@@ -35,4 +35,3 @@ redireccionar("LibrosShow.php?id=" . $id);
 </html>
 
 
-?>

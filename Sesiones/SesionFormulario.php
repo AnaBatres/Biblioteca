@@ -5,9 +5,6 @@ if (sesionIniciada()) {
     redireccionar("../LibrosIndex.php");
 }
 
-
-
-
 ?>
 
 
@@ -21,13 +18,6 @@ if (sesionIniciada()) {
 </head>
 
 <div class="contenedor6"><body>
-<?php if (isset($_REQUEST["error"])) { ?>
-    <p style="color: red">Error de autenticación, inténtelo de nuevo.</p>
-<?php } ?>
-
-<?php if (isset($_REQUEST["sesionCerrada"])) { ?>
-    <p style="color: blue">Se ha cerrado correctamente la sesión.</p>
-<?php } ?>
 
 <form action="SesionComprobar.php" method="post">
 
@@ -40,6 +30,15 @@ if (sesionIniciada()) {
     <input type="submit" name="enviar">
     <a href="Registro.php">Registrarse</a>
     <a href="../LibrosIndex.php">Volver a la pagina principal</a>
+    <br>
+    <br>
+    <?php if (isset($_REQUEST["error"])) { ?>
+        <p style="color: red">Error de autenticación, inténtelo de nuevo.</p>
+    <?php } ?>
+
+    <?php if (isset($_REQUEST["sesionCerrada"])) { ?>
+        <p style="color: blue">Se ha cerrado correctamente la sesión.</p>
+    <?php } ?>
 </form>
 </body>
 </div>

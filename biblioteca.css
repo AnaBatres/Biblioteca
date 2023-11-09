@@ -21,8 +21,8 @@ header {
     color: #fff;
     padding: 20px 0;
     display: flex;
-    justify-content: space-between; /* Alinea el contenido al inicio y al final del encabezado */
-    align-items: center; /* Alinea verticalmente al centro */
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h2 {
@@ -287,7 +287,7 @@ textarea {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    text-align: center; /* Añadido para centrar el contenido */
+    text-align: center;
 }
 
 .contenedor5 table {
@@ -321,6 +321,7 @@ textarea {
 .contenedor6 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    height: 100%;
 }
 
 .contenedor6 h1 {

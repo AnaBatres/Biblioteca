@@ -22,17 +22,17 @@ function salirSiSesionFalla()
 function comprobarRenovarSesion(): bool
 {
     if (haySesionRAM()) {
-        if (isset($_COOKIE["id"])) { // Basta con mirar si parece que viene cookie porque ya acabamos de validar la sesión RAM
+        if (isset($_COOKIE["id"])) {
             generarRenovarSesionCookie();
         }
-        return true; // Esto es en todo caso
-    } else { // NO hay sesión RAM
+        return true;
+    } else {
         $usuario = obtenerUsuarioPorCookie();
-        if ($usuario) { // Equivale a if ($usuario != null)
-            generarSesionRAM($usuario); // Canjear la sesión cookie por una sesión RAM.
+        if ($usuario) {
+            generarSesionRAM($usuario);
             generarRenovarSesionCookie();
             return true;
-        } else { // Ni RAM, ni cookie
+        } else {
             return false;
         }
     }
@@ -56,7 +56,6 @@ function obtenerUsuarioPorContrasenna(string $identificador, string $contrasenna
     else return $select->fetch();
 }
 
-// Antiguo haySesionCookie(): bool
 function obtenerUsuarioPorCookie(): ?array
 {
     if (isset($_COOKIE["id"])) {
@@ -68,7 +67,7 @@ function obtenerUsuarioPorCookie(): ?array
         $select->execute([
             $_COOKIE["id"],
             $_COOKIE["codigoCookie"],
-            date("Y-m-d H:i:s", time()) // Fecha-hora de ahora mismo obtenida del sistema.
+            date("Y-m-d H:i:s", time())
         ]);
         $filasObtenidas = $select->rowCount();
 
@@ -81,9 +80,6 @@ function obtenerUsuarioPorCookie(): ?array
 
 function generarSesionRAM(array $usuario)
 {
-    // Guardar el id es lo único indispensable.
-    // El resto son por evitar accesos a la BD a cambio del riesgo
-    // de que mis datos en sesión RAM estén obsoletos.
     $_SESSION["id"] = $usuario["id"];
     $_SESSION["identificador"] = $usuario["identificador"];
     $_SESSION["nombre"] = $usuario["nombre"];
@@ -91,35 +87,32 @@ function generarSesionRAM(array $usuario)
 
 function generarRenovarSesionCookie()
 {
-    $codigoCookie = uniqid(); // Genera un código aleatorio "largo".
+    $codigoCookie = uniqid();
 
     $fechaCaducidad = time() + 24 * 60 * 60;
     $fechaCaducidadParaBD = date("Y-m-d H:i:s", $fechaCaducidad);
 
-    // Anotar en la BD el codigoCookie y su caducidad.
+
     $conexion = obtenerPdoConexionBD();
     $sql = "UPDATE usuario SET codigoCookie=?, caducidadCodigoCookie=? WHERE id=?";
     $select = $conexion->prepare($sql);
     $select->execute([$codigoCookie, $fechaCaducidadParaBD, $_SESSION["id"]]);
-
-    // Crear (o renovar) las cookies.
+    
     setcookie('id', strval($_SESSION["id"]), $fechaCaducidad);
     setcookie('codigoCookie', $codigoCookie, $fechaCaducidad);
 }
 
 function cerrarSesion()
 {
-    // Eliminar de la BD el codigoCookie y su caducidad.
+
     $conexion = obtenerPdoConexionBD();
     $sql = "UPDATE usuario SET codigoCookie=NULL, caducidadCodigoCookie=NULL WHERE id=?";
     $select = $conexion->prepare($sql);
-    $select->execute([$_SESSION["id"]]); // Se añade el parámetro a la consulta preparada.
+    $select->execute([$_SESSION["id"]]);
 
-    // Borrar las cookies.
     setcookie('id', "", time() - 3600);
     setcookie('codigoCookie', "", time() - 3600);
 
-    // Destruir sesión RAM (implica borrar cookie de PHP "PHPSESSID").
     session_destroy();
 }
 

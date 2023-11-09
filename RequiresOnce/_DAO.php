@@ -42,7 +42,7 @@ class DAO
 
         $select = self::$conexion->prepare($sql);
         $select->execute($parametros);
-        return $select->fetchAll(); // Se devuelve "el $rs"
+        return $select->fetchAll();
     }
 
     private static function ejecutarInsert(string $sql, array $parametros): ?int
@@ -571,6 +571,15 @@ class DAO
         );
 
         return $rs ? true : false;
+    }
+
+    public static function almacenarCookie(int $usuarioID, string $cookieValor): bool
+    {
+        $fechaCaducidad = date('Y-m-d H:i:s', time() + 3600 * 24 * 7);
+        $resultado = self::ejecutarUpdel("UPDATE usuario SET cookie = ?, fecha_caducidad = ? WHERE id = ?",
+            [$cookieValor, $fechaCaducidad, $usuarioID]);
+
+        return $resultado;
     }
 
 

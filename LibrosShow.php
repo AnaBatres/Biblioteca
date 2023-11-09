@@ -37,7 +37,9 @@ if(sesionIniciada()) {
 <div class="menu">
     <ul>
         <li><a href="LibrosIndex.php">Inicio</a></li>
+        <?php if(sesionIniciada()) { ?>
         <li><a href="FavoritosIndex.php">Mis favoritos</a></li>
+        <?php } ?>
     </ul>
 </div>
 
@@ -60,7 +62,7 @@ if(sesionIniciada()) {
         <label for="calificacion">Calificación (1-5):</label>
         <input type="number" name="calificacion" max="5" required>
         <br>
-        <label for="comentario">Comentario:</label> 
+        <label for="comentario">Comentario:</label>
         <input type="text" name="comentario" required>
         <br>
         <input type="submit" value="Enviar Reseña">
@@ -73,7 +75,7 @@ if(sesionIniciada()) {
         <p>Calificación: <img src="Imagenes/estrella<?= $resena->getCalificacion()?>.png"></p>
         <p>Comentario:</p> <?= $resena->getComentario()?>
         <?php if(sesionIniciada()) { ?>
-            <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre()) { ?>
+            <?php if (DAO::usuarioObtenerPorId($resena->getUsuarioId())->getNombre() === $usuario->getNombre() || DAO::usuarioObtenerRol($usuarioID) === "admin") { ?>
                 <a href="EliminarResena.php?id=<?=$resena->getId()?>"><img style="width: 15px; height: 15px;" src="Imagenes/eliminar.png"></a>
             <?php } ?>
         <?php } ?>
